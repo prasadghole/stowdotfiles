@@ -81,6 +81,7 @@ export FZF_BASE=~/.fzf/bin/fzf
 plugins=(git
 	tmux
 	fzf
+	copyfile
 	)
 	
 
@@ -111,7 +112,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
