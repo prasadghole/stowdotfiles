@@ -1,3 +1,7 @@
+
+Capslock::Esc
+Esc::Capslock
+
 !1:: ; Alt + 1
 if WinExist("ahk_exe WindowsTerminal.exe") {
     WinActivate
@@ -33,4 +37,19 @@ return
         WinActivate
     Else
         Run  "C:\Program Files\Emacs\emacs-30.1\bin\runemacs.exe"
+return
+
+!6:: ; stm32cube ide
+    ifwinexist ahk_exe stm32cubeide.exe
+        winactivate
+    else
+        run "d:\st\stm32cubeide_1.18.0\stm32cubeide\stm32cubeide.exe"
+
+return
+
+!7:: ; Rio
+    ifWinExist ahk_exe rio.exe
+        winActivate
+    else 
+        run "c:\Program Files\Rio\rio.exe"
 return
