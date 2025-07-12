@@ -2,6 +2,17 @@
 Capslock::Esc
 Esc::Capslock
 
+
+; Long rigtht backspace key sucks
+!x::Send {Backspace}
+
+
+; Alt + H/J/K/L as arrow keys
+!h::Send {Left}
+!j::Send {Down}
+!k::Send {Up}
+!l::Send {Right}
+
 #1:: ; Alt + 1
 if WinExist("ahk_exe WindowsTerminal.exe") {
     WinActivate
@@ -25,11 +36,11 @@ return
         Run "C:\Program Files\Mozilla Firefox\firefox.exe"
     return
 
-#4:: ; Alt + 4 — Neovim qT
-    IfWinExist ahk_exe nvim-qt.exe
+#4:: ; Alt + 6 — Emacs
+    IfWinExist ahk_exe emacs.exe
         WinActivate
     Else
-        Run "C:\Program Files\neovim-qt 0.2.19\bin\nvim-qt.exe"
+        Run  "C:\Home\emacs-30.1\bin\runemacs.exe"
 return
 
 #5:: ; Alt + 5
@@ -39,11 +50,11 @@ return
         Run notepad.exe
 return
 
-#6:: ; Alt + 6 — Emacs
-    IfWinExist ahk_exe emacs.exe
+#6:: ; Alt + 4 — Neovim qT
+    IfWinExist ahk_exe nvim-qt.exe
         WinActivate
     Else
-        Run  "C:\Program Files\Emacs\emacs-30.1\bin\runemacs.exe"
+        Run "C:\Program Files\neovim-qt 0.2.19\bin\nvim-qt.exe"
 return
 
 #7:: ; stm32cube ide
