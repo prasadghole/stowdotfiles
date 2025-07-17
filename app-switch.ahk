@@ -1,3 +1,6 @@
+; For freestyle mac keyboard layout
+LAlt::LWin
+LWin::LAlt
 
 Capslock::Esc
 Esc::Capslock
