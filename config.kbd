@@ -1,0 +1,62 @@
+;; KMonad configuration for home row keys on Windows
+;; This config implements home row mods and navigation layer
+
+(defcfg
+  input  (low-level-hook)
+  output (send-event-sink)
+  fallthrough true
+  allow-cmd true
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet menu rctl
+)
+
+(defalias
+  ;; Home row mods (hold for modifier, tap for letter)
+  a (tap-hold-next-release 200 a lctl)
+  s (tap-hold-next-release 200 s lalt)
+  d (tap-hold-next-release 200 d lmet)
+  f (tap-hold-next-release 200 f lsft)
+  
+  j (tap-hold-next-release 200 j rsft)
+  k (tap-hold-next-release 200 k rmet)
+  l (tap-hold-next-release 200 l ralt)
+  ; (tap-hold-next-release 200 ; rctl)
+  
+  ;; Layer toggles
+  nav (tap-hold-next-release 200 spc (layer-toggle navigation))
+  sym (tap-hold-next-release 200 ret (layer-toggle symbols))
+  
+  ;; Caps word toggle
+  ;; Caps lock toggle (tap twice to toggle caps)
+  cw (tap-hold-next-release 200 esc caps)
+)
+
+(deflayer default
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @cw  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    @sym
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @nav           ralt rmet menu rctl
+)
+
+(deflayer navigation
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+  _    _    _    _    _    _    _    pgup up   pgdn _    _    _    _
+  _    _    _    _    _    _    home left down rght end  _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _    _
+)
+
+(deflayer symbols
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    !    @    #    $    %    ^    &    *    \(   \)   _    _    _
+  _    1    2    3    4    5    6    7    8    9    0    _    _
+  _    `    ~    _    _    _    -    =    [    ]    \    _
+  _    _    _              _              _    _    _    _
+)
