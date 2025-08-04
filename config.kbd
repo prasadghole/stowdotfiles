@@ -1,6 +1,5 @@
-;; KMonad configuration for home row keys on Windows
-;; This config implements home row mods and navigation layer
-
+;; KMonad configuration for Kinesis Freestyle 2 for Mac on Windows
+;; Home row mods with Tab instead of Windows key, plus Caps Lock/Escape swap
 (defcfg
   input  (low-level-hook)
   output (send-event-sink)
@@ -9,6 +8,7 @@
 )
 
 (defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -17,46 +17,84 @@
 )
 
 (defalias
-  ;; Home row mods (hold for modifier, tap for letter)
+  ;; Home row mods (hold for modifier, tap for letter) - 200ms delay
+  ;; Left hand
   a (tap-hold-next-release 200 a lctl)
   s (tap-hold-next-release 200 s lalt)
-  d (tap-hold-next-release 200 d lmet)
-  f (tap-hold-next-release 200 f lsft)
+  d (tap-hold-next-release 200 d lsft)
+  f (tap-hold-next-release 200 f lmet)
   
-  j (tap-hold-next-release 200 j rsft)
-  k (tap-hold-next-release 200 k rmet)
+  ;; Right hand  
+  j (tap-hold-next-release 200 j rmet)
+  k (tap-hold-next-release 200 k rsft)
   l (tap-hold-next-release 200 l ralt)
   ; (tap-hold-next-release 200 ; rctl)
   
-  ;; Layer toggles
-  nav (tap-hold-next-release 200 spc (layer-toggle navigation))
-  sym (tap-hold-next-release 200 ret (layer-toggle symbols))
+  ;; Layer toggles - 200ms delay
+  ;; nav (tap-hold-next-release 200 spc (layer-toggle navigation))
+  ;; sym (tap-hold-next-release 200 ret (layer-toggle symbols))
   
-  ;; Caps word toggle
-  ;; Caps lock toggle (tap twice to toggle caps)
-  cw (tap-hold-next-release 200 esc caps)
+  ;; Layer activation keys (F8-F12)
+  f8 (layer-toggle navigation)       ;; F8 - Toggle navigation layer
+  f9 (layer-toggle symbols)          ;; F9 - Toggle symbols layer  
+  f10 (layer-toggle numbers)         ;; F10 - Toggle numbers layer
+  f11 (layer-toggle media)           ;; F11 - Toggle media layer
+  f12 (layer-toggle function)        ;; F12 - Toggle function layer
 )
 
 (deflayer default
+  caps f1   f2   f3   f4   f5   f6   f7   @f8  @f9  @f10 @f11 @f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @cw  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    @sym
+  esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           @nav           ralt rmet menu rctl
+  lctl lmet lalt        spc           ralt rmet menu rctl
 )
 
 (deflayer navigation
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-  _    _    _    _    _    _    _    pgup up   pgdn _    _    _    _
-  _    _    _    _    _    _    home left down rght end  _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _    _    _
+  *    *    *    *    *    *    *    pgup up   pgdn *    *    *    _
+  *    *    *    *    *    *    home left down rght end  *    *
+  *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *              *              *    *    *    *
 )
 
 (deflayer symbols
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    !    @    #    $    %    ^    &    *    \(   \)   _    _    _
-  _    1    2    3    4    5    6    7    8    9    0    _    _
-  _    `    ~    _    _    _    -    =    [    ]    \    _
-  _    _    _              _              _    _    _    _
+  *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    !    @    #    $    %    ^    &    *    \(   \)   *    *    *
+  *    1    2    3    4    5    6    7    8    9    0    *    _
+  *    `    ~    *    *    *    -    =    [    ]    \    _
+  *    *    *              *              *    *    *    *
+)
+
+;; Numbers layer
+(deflayer numbers
+  *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    7    8    9    *    *    *    *
+  *    *    *    *    *    *    *    4    5    6    0    *    _
+  *    *    *    *    *    *    *    1    2    3    *    *
+  *    *    *              *              *    *    *    *
+)
+
+;; Media layer
+(deflayer media
+  *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    prev pp   next *    *    *    *
+  *    *    *    *    *    *    *    vold volu mute *    *    _
+  *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *              *              *    *    *    *
+)
+
+;; Function layer 
+(deflayer function
+  *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    _
+  *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *              *              *    *    *    *
 )
