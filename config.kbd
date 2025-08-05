@@ -44,12 +44,12 @@
   lctl lmet lalt        spc           ralt rmet menu rctl
 )
 
-;; Numbers layer - FIXED: using _ instead of * for passthrough
+;; Numbers layer - 
 (deflayer numbers
   _    _    _    _    _    _    _    _    _    @f9    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    /    7    8    9    -    _    _    _
+  _    _    _    _    _    _    /    1    2    3    -    _    _    _
   _    _    _    _    _    _    *    4    5    6    0    _    _
-  _    _    _    _    _    _    =    1    2    3    .    _
+  _    _    _    _    _    _    =    7    8    9    .    _
   _    _    _              _              _    _    _    _
 )
