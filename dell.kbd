@@ -1,0 +1,62 @@
+;; KMonad configuration for Kinesis Freestyle 2 for Mac on Windows
+;; Home row mods with Tab instead of Windows key, plus Caps Lock/Escape swap
+(defcfg
+  input  (low-level-hook)
+  output (send-event-sink)
+  fallthrough true
+   allow-cmd false
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl fn lmet lalt           spc            ralt rctl
+)
+
+(defalias
+  ;; Caps lock becomes:
+  ;; - tab on tap (short press)
+  ;; - Escape on (long press)s
+  tab (tap-hold-next-release 150 tab esc )
+)
+
+(defalias
+  ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
+  ;; Left hand
+  a (tap-hold-next-release 150 a lctl)
+  s (tap-hold-next-release 150 s lalt)
+  d (tap-hold-next-release 150 d lsft)
+  f (tap-hold-next-release 150 f lmet)
+  
+  ;; Right hand  
+  j (tap-hold-next-release 150 j rmet)
+  k (tap-hold-next-release 150 k rsft)
+  l (tap-hold-next-release 150 l lalt)
+  ; (tap-hold-next-release 150 ; lctl)
+  
+  ;; Layer activation keys (F8-F12)
+  f8 (layer-switch numbers)         ;; F8 - Toggle numbers layer
+  f9 (layer-switch default)         ;; F8 - Toggle numbers layer
+)
+
+(deflayer default
+  caps f1   f2   f3   f4   f5   f6   f7   @f8  @f9  f10 f11 f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @tab  @a   @s   @d   @f   g     h    @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl fn lmet lalt           spc            ralt rctl
+)
+
+;; Numbers layer - 
+(deflayer numbers
+  _    _    _    _    _    _    _    _    _    @f9    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    /    1    2    3    -    _    _    _
+  _    _    _    _    _    _    *    4    5    6    0    _    _
+  _    _    _    _    _    _    =    7    8    9    .    _
+  _        _              _              _    _    _    _
+)
