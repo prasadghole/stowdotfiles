@@ -26,16 +26,16 @@
 (defalias
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
   ;; Left hand
-  s (tap-hold-next-release 150 s lctl)
-  d (tap-hold-next-release 150 d lalt)
-  f (tap-hold-next-release 150 f lsft)
-  g (tap-hold-next-release 150 g lmet)
+  a (tap-hold-next-release 150 a lctl)
+  s (tap-hold-next-release 150 s lalt)
+  d (tap-hold-next-release 150 d lsft)
+  f (tap-hold-next-release 150 f lmet)
   
   ;; Right hand  
-  h (tap-hold-next-release 150 h rmet)
-  j (tap-hold-next-release 150 j rsft)
-  k (tap-hold-next-release 150 k lalt)
-  l (tap-hold-next-release 150 l lctl)
+  j (tap-hold-next-release 150 j rmet)
+  k (tap-hold-next-release 150 k rsft)
+  l (tap-hold-next-release 150 l lalt)
+  ; (tap-hold-next-release 150 ; lctl)
   
   ;; Layer activation keys (F8-F12)
   f8 (layer-switch numbers)         ;; F8 - Toggle numbers layer
@@ -46,7 +46,7 @@
   caps f1   f2   f3   f4   f5   f6   f7   @f8  @f9  f10 f11 f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @tab  a   @s   @d   @f   @g     @h    @j   @k   @l   ;   '    ret
+  @tab  @a   @s   @d   @f   g     h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl fn lmet lalt           spc            ralt rctl
 )
