@@ -141,3 +141,4 @@ alias gp='git push origin master'
 
 export ROAM_DIR="~/roam"
 source <(fzf --zsh)
+eval "$(zoxide init zsh)"
