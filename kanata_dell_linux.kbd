@@ -1,0 +1,49 @@
+;; KMonad configuration for Kinesis Freestyle 2 for Mac on Windows
+;; Home row mods with Tab instead of Windows key, plus Caps Lock/Escape swap
+(defcfg 
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+  
+  ;; linux-dev /dev/input/event5
+  ;;fallthrough true
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p     [  ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl  lmet lalt           spc            ralt rctl
+)
+
+(defalias 
+  ;; Caps lock becomes:
+  ;; - tab on tap (short press)
+  ;; - Escape on long press
+  tab (tap-hold 150 150 tab esc)
+  
+  ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
+  ;; Left hand
+  a (tap-hold 150 150 a lmet)
+  s (tap-hold 150 150 s lsft) 
+  d (tap-hold 150 150 d lalt) 
+  f (tap-hold 150 150 f lctl)
+  
+  ;; Right hand  
+  j (tap-hold 150 150 j rctl)
+  k (tap-hold 150 150 k ralt)
+  l (tap-hold 150 150 l rsft)
+  ;(tap-hold 150 150 ; rmet)
+  
+)
+
+(deflayer default
+  caps f1   f2   f3   f4   f5   f6   f7   f8  f9  f10 f11 f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @tab  @a   @s   @d   @f   g     h    @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl  lmet lalt           spc            ralt rctl
+)
+
