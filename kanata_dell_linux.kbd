@@ -35,13 +35,27 @@
   k (tap-hold 150 150 k ralt)
   l (tap-hold 150 150 l rsft)
   ;(tap-hold 150 150 ; rmet)
+
+  c_q (chord copypaste q)
+  c_w (chord copypaste w)
   
+  p_o (chord copypaste o)
+  p_p (chord copypaste p)
+)
+
+(defchords copypaste 50
+  (q      ) q 
+  (  w    ) w
+  ( q  w   ) C-c
+  (o      ) o 
+  (  p    ) p
+  ( o  p   ) C-v
 )
 
 (deflayer default
   caps f1   f2   f3   f4   f5   f6   f7   f8  f9  f10 f11 f12
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
+  tab  @c_q  @c_w  e    r    t    y    u    i    @p_o    @p_p    [    ]    \
   @tab  @a   @s   @d   @f   g     h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl  lmet lalt           spc            ralt rctl
