@@ -29,6 +29,7 @@
   s (tap-hold 150 150 s lsft) 
   d (tap-hold 150 150 d lalt) 
   f (tap-hold 150 150 f lctl)
+  spc (tap-hold 150 150 spc ret)
   
   ;; Right hand  
   j (tap-hold 150 150 j rctl)
@@ -58,6 +59,6 @@
   tab  @c_q  @c_w  e    r    t    y    u    i    @p_o    @p_p    [    ]    \
   @tab  @a   @s   @d   @f   g     h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt           spc            ralt rctl
+  lctl  lmet lalt           @spc            ralt rctl
 )
 
