@@ -34,8 +34,8 @@ include ~/.config/i3/config.d/*.conf
 #include ~/.config/i3/i3status/statusbar.conf
 
 ##-- Mod Keys ----------------------------------
-set $MOD Mod4
-set $ALT Mod1
+set $MOD Mod1
+set $ALT Mod4
 
 ##-- General Settings --------------------------
 
