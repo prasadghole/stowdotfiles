@@ -21,7 +21,7 @@
   ;; Caps lock becomes:
   ;; - tab on tap (short press)
   ;; - Escape on long press
-  tab (tap-hold 150 250 tab esc)
+  tab (tap-hold 150 150 tab esc)
   
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
   ;; Left hand
