@@ -2,9 +2,7 @@
 ;; Home row mods with Tab instead of Windows key, plus Caps Lock/Escape swap
 
 (defcfg 
-;;  linux-dev /dev/input/by-id/usb-KINESIS_CORPORATION_KB800HM_Kinesis_Freestyle2_for_Mac-event-kbd
-  ;; linux-dev /dev/input/event5
-  ;;fallthrough true
+  linux-dev /dev/input/by-id/usb-KINESIS_CORPORATION_KB800HM_Kinesis_Freestyle2_for_Mac-event-kbd
   process-unmapped-keys yes
 )
 
@@ -45,7 +43,6 @@
   
   p_o (chord copypaste o)
   p_p (chord copypaste p)
-  ;; Layer activation keys (F8-F9)
 )
 
 
