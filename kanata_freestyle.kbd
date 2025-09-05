@@ -36,33 +36,35 @@
   ;(tap-hold 150 150 ; rmet)
   
   sym-arrow (layer-while-held arrow)
-  g (tap-hold 150 150 g @sym-arrow)
-  h (tap-hold 150 150 h bspc)
-  c_q (chord copypaste q)
-  c_w (chord copypaste w)
+  t (tap-hold 150 150 t @sym-arrow)
+  c_q (chord mychords q)
+  c_w (chord mychords w)
   
-  p_o (chord copypaste o)
-  p_p (chord copypaste p)
+  p_o (chord mychords o)
+  p_p (chord mychords p)
+
+  del_word_g(chord mychords g)
+  del_word_h(chord mychords h)
 )
 
 
-(defchords copypaste 50
+(defchords mychords 50
   (q      ) q 
   (  w    ) w
   ( q  w   ) C-c
   (o      ) o 
   (  p    ) p
   ( o  p   ) C-v
-
-
-  
+  ( g     ) g
+  ( h     ) h
+  ( g  h   ) bspc
 )
 
 (deflayer base 
   caps 
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @c_q    @c_w    e    r    t    y    u    i    @p_o    @p_p    [    ]    \
-  @tab @a   @s   @d   @f   @g    @h    @j   @k   @l   @;   '    ret
+  tab  @c_q    @c_w    e    r    @t    y    u    i    @p_o    @p_p    [    ]    \
+  @tab @a   @s   @d   @f   @del_word_g @del_word_h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lalt lmet      @spc           rmet ralt
 )
