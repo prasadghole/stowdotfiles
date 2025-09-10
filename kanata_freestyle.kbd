@@ -61,7 +61,7 @@
   tab  @c_q    @c_w    e    r    t    y    u    i    @p_o    @p_p    [    ]    \
   @tab @a   @s   @d   @f   @g   h    @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lalt lmet      @spc           rmet ralt
+  lctl lalt lmet      spc           rmet ralt
 )
 
 (deflayer arrow
