@@ -23,43 +23,30 @@
   
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
   ;; Left hand
-  a (tap-hold 150 150 a lmet)
-  s (tap-hold 150 150 s lsft) 
-  d (tap-hold 150 150 d lalt) 
-  f (tap-hold 150 150 f lctl)
+  q (tap-hold 150 150 q lmet)
+  w (tap-hold 150 150 w lsft) 
+  e (tap-hold 150 150 e lalt) 
+  r (tap-hold 150 150 r lctl)
   spc (tap-hold 150 250 spc ret)
   
   ;; Right hand  
-  j (tap-hold 150 150 j rctl)
-  k (tap-hold 150 150 k ralt)
-  l (tap-hold 150 150 l rsft)
-  ;(tap-hold 150 150 ; rmet)
+  u (tap-hold 150 150 u rctl)
+  i (tap-hold 150 150 i ralt)
+  o (tap-hold 150 150 o rsft)
+  p(tap-hold 150 150 p rmet)
   
   sym-arrow (layer-while-held arrow)
   g (tap-hold 150 150 g @sym-arrow)
-  c_q (chord mychords q)
-  c_w (chord mychords w)
-  
-  p_o (chord mychords o)
-  p_p (chord mychords p)
 
 )
 
 
-(defchords mychords 50
-  (q      ) q 
-  (  w    ) w
-  ( q  w   ) C-c
-  (o      ) o 
-  (  p    ) p
-  ( o  p   ) C-v
-)
 
 (deflayer base 
   caps 
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @c_q    @c_w    e    r    t    y    u    i    @p_o    @p_p    [    ]    \
-  @tab @a   @s   @d   @f   @g   h    @j   @k   @l   @;   '    ret
+  tab  @q    @w    @e    @r    t    y    @u    @i    @o    @p    [    ]    \
+  @tab a   s   d   f   @g   h    j   k   l   ;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lalt lmet      spc           rmet ralt
 )
@@ -67,8 +54,8 @@
 (deflayer arrow
   caps 
   grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @c_q  @c_w  e    r    t    y    bspc    i    @p_o    @p_p    [    ]    \
-  @tab  @a   @s   @d   @f   g     ArrowLeft   ArrowUp   ArrowDown  ArrowRight  ;  '    ret
+  tab  q  w  e    r    t    y    bspc    i    o    p    [    ]    \
+  @tab  a   s   d   f   g     ArrowLeft   ArrowUp   ArrowDown  ArrowRight  ;  '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl  lmet lalt           @spc            ralt rctl
 )
