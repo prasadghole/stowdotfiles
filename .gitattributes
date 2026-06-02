@@ -31,6 +31,10 @@
 .config/dconf/user binary
 .config/pulse/cookie binary
 
+# UTF-16 encoded AHK script (contains NUL bytes so Git auto-detects as binary;
+# preserve its original CRLF bytes exactly, as it's a Windows-specific file)
+freestyle.ahk binary
+
 # Temp / autosave files that might get tracked accidentally - treat as binary
 *.goutputstream-* binary
 .config/geany/.goutputstream-* binary
