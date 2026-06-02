@@ -1,0 +1,36 @@
+# Enforce consistent LF line endings to prevent spurious diffs from
+# Windows CRLF vs Unix LF (Git line ending normalization issues).
+# .gitattributes takes precedence over core.autocrlf.
+# See: https://git-scm.com/docs/gitattributes
+
+# Default: treat as text and use LF everywhere (in repo + working tree)
+* text eol=lf
+
+# Override for known binary files (no conversion, no diff by default)
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.7z binary
+*.bz2 binary
+*.xz binary
+*.exe binary
+*.dll binary
+*.bin binary
+*.dat binary
+*.db binary
+*.so binary
+*.dylib binary
+
+# Specific binary data/configs in this repo
+.config/dconf/user binary
+.config/pulse/cookie binary
+
+# Temp / autosave files that might get tracked accidentally - treat as binary
+*.goutputstream-* binary
+.config/geany/.goutputstream-* binary

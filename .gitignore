@@ -1,0 +1,21 @@
+# Windows alternate data stream / zone identifier files (created by browsers,
+# Explorer on downloads from internet). These cause untracked file noise.
+*Zone.Identifier
+
+# Editor temporary / backup files
+*~
+*.swp
+*.swo
+*.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Geany autosave streams (can appear as untracked)
+.config/geany/.goutputstream-*
+
+# Common for stow/dotfiles
+# (add more per your setup)
