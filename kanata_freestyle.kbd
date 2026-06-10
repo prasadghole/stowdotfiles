@@ -16,37 +16,54 @@
 )
 
 (defalias 
-  ;; Caps lock becomes:
-  ;; - tab on tap (short press)
-  ;; - Escape on long press
+  ;; Caps lock backup: Tab on tap, Escape on hold
   tab (tap-hold 150 150 tab esc)
   
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
   ;; Left hand
-  q (tap-hold 150 150 q lmet)
-  w (tap-hold 150 150 w lsft) 
-  e (tap-hold 150 150 e lalt) 
-  r (tap-hold 150 150 r lctl)
+  q (tap-hold 150 150 q rmet)
+  w (tap-hold 150 150 w rsft) 
+  e (tap-hold 150 150 e ralt) 
+  r (tap-hold 150 150 r rctl)
   spc (tap-hold 150 250 spc ret)
   
   ;; Right hand  
-  u (tap-hold 150 150 u rctl)
-  i (tap-hold 150 150 i ralt)
-  o (tap-hold 150 150 o rsft)
-  p(tap-hold 150 150 p rmet)
+  u (tap-hold 150 150 u lctl)
+  i (tap-hold 150 150 i lalt)
+  o (tap-hold 150 150 o lsft)
+  p (tap-hold 150 150 p lmet)
   
+  ;; Arrow layer toggle via 'g'
   sym-arrow (layer-while-held arrow)
   g (tap-hold 150 150 g @sym-arrow)
 
+  ;; --- MASTER HOME ROW CHORD ALIASES ---
+  s (chord home-chords s-key)
+  d (chord home-chords d-key)
+  f (chord home-chords f-key)
+  j (chord home-chords j-key)
+  k (chord home-chords k-key)
 )
 
-
+;; --- THE MASTER CHORD ENGINE ---
+;; Coordinates Tab, Enter, and Escape cleanly with a comfortable 45ms window
+(defchords home-chords 45
+  (s-key) s
+  (d-key) d
+  (f-key) f
+  (j-key) j
+  (k-key) k
+  
+  (d-key k-key) esc  ;; D + K = Escape     (Dual-Middle Slap)
+  (f-key j-key) ret  ;; F + J = Enter   (Dual-Index Slap)
+  (s-key d-key) tab  ;; J + K = tab  
+)
 
 (deflayer base 
   caps 
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  @q    @w    @e    @r    t    y    @u    @i    @o    @p    [    ]    \
-  @tab a   s   d   f   @g   h    j   k   l   ;   '    ret
+  @tab a    @s    @d    @f   @g   h    @j   @k   l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lalt lmet      spc           rmet ralt
 )
@@ -54,9 +71,8 @@
 (deflayer arrow
   caps 
   grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q  w  e    r    t    y    bspc    i    o    p    [    ]    \
+  tab  q  w  e    r    t    y    bspc @i    o    p    [    ]    \
   @tab  a   s   d   f   g     ArrowLeft   ArrowUp   ArrowDown  ArrowRight  ;  '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl  lmet lalt           @spc            ralt rctl
 )
-
