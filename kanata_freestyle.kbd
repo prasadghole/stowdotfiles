@@ -16,7 +16,7 @@
 )
 
 (defalias 
-  ;; Caps lock backup: Tab on tap, Escape on hold
+  ;; Caps lock: Tab on tap, Escape on hold
   tab (tap-hold 150 150 tab esc)
   
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
@@ -32,10 +32,14 @@
   i (tap-hold 150 150 i lalt)
   o (tap-hold 150 150 o lsft)
   p (tap-hold 150 150 p lmet)
-  
-  ;; Arrow layer toggle via 'g'
+
+  ;; Arrow layer toggle via 'g' — unchanged from original
   sym-arrow (layer-while-held arrow)
   g (tap-hold 150 150 g @sym-arrow)
+
+  ;; Numpad layer toggle via 'b'
+  sym-numpad (layer-while-held numpad)
+  num-layer (tap-hold 150 150 b @sym-numpad)
 
   ;; --- MASTER HOME ROW CHORD ALIASES ---
   s (chord home-chords s-key)
@@ -54,25 +58,46 @@
   (j-key) j
   (k-key) k
   
-  (d-key k-key) esc  ;; D + K = Escape     (Dual-Middle Slap)
-  (f-key j-key) ret  ;; F + J = Enter   (Dual-Index Slap)
-  (s-key d-key) tab  ;; J + K = tab  
+  (d-key k-key) esc  ;; D + K = Escape
+  (f-key j-key) ret  ;; F + J = Enter
+  (s-key d-key) tab  ;; S + D = Tab
 )
 
 (deflayer base 
   caps 
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @q    @w    @e    @r    t    y    @u    @i    @o    @p    [    ]    \
-  @tab a    @s    @d    @f   @g   h    @j   @k   l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  tab  @q   @w   @e   @r   t    y    @u   @i   @o   @p   [    ]    \
+  @tab a    @s   @d   @f   @g   h     @j   @k   l     ;    '    ret
+  lsft z    x    c    v    @num-layer   n    m    ,    .    /    rsft
   lctl lalt lmet      spc           rmet ralt
 )
 
 (deflayer arrow
   caps 
-  grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q  w  e    r    t    y    bspc @i    o    p    [    ]    \
-  @tab  a   s   d   f   g     ArrowLeft   ArrowUp   ArrowDown  ArrowRight  ;  '    ret
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    bspc i   o    p    [    ]    \
+  @tab a    s    d    f    g    ArrowLeft ArrowDown ArrowUp ArrowRight ;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt           @spc            ralt rctl
+  lctl lmet lalt           @spc            ralt rctl
+)
+
+;; Numpad layer — hold B to activate
+;; Right-hand keys become a numpad:
+;;   u i o  →  7 8 9
+;;   j k l  →  4 5 6
+;;   m , .  →  1 2 3
+;;   n      →  0
+;;   y      →  kp/  (divide)
+;;   p      →  kp*  (multiply)
+;;   ;      →  kp-  (minus)
+;;   '      →  kp+  (plus)
+;;   /      →  kp.  (decimal point)
+;;   ret    →  kprt (numpad Enter)
+(deflayer numpad
+  caps
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    kp/  kp7  kp8  kp9  kp*  [    ]    \
+  @tab a    s    d    f    g    h    kp4  kp5  kp6  kp-  kp+  kprt
+  lsft z    x    c    v    b    kp0  kp1  kp2  kp3  kp.  rsft
+  lctl lalt lmet           spc            rmet ralt
 )
