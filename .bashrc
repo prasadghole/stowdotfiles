@@ -152,6 +152,12 @@ export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\]\$(br=
 export PATH="/home/pg/.local/bin:$PATH"
 
 # extend with my alias 
-source myalias.sh
+source bash_aliases.sh
 
 
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+
+source /home/pg/.config/broot/launcher/bash/br
+
+export PATH=$PATH:$HOME/.cargo/bin/
