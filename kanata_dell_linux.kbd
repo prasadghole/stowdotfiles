@@ -18,60 +18,88 @@
 )
 
 (defalias 
-  ;; Caps lock becomes:
-  ;; - tab on tap (short press)
-  ;; - Escape on long press
+  ;; Caps lock: Tab on tap, Escape on hold
   tab (tap-hold 150 150 tab esc)
   
   ;; Home row mods (hold for modifier, tap for letter) - 150ms delay
   ;; Left hand
-  a (tap-hold 150 150 a lmet)
-  s (tap-hold 150 150 s lsft) 
-  d (tap-hold 150 150 d lalt) 
-  f (tap-hold 150 150 f lctl)
-  spc (tap-hold 100 250 spc ret)
+  q (tap-hold 150 150 q rmet)
+  w (tap-hold 150 150 w rsft) 
+  e (tap-hold 150 150 e ralt) 
+  r (tap-hold 150 150 r rctl)
+  spc (tap-hold 150 250 spc ret)
   
   ;; Right hand  
-  j (tap-hold 150 150 j rctl)
-  k (tap-hold 150 150 k ralt)
-  l (tap-hold 150 150 l rsft)
-  ;(tap-hold 150 150 ; rmet)
- 
+  u (tap-hold 150 150 u lctl)
+  i (tap-hold 150 150 i lalt)
+  o (tap-hold 150 150 o lsft)
+  p (tap-hold 150 150 p lmet)
+
+  ;; Arrow layer toggle via 'g' — unchanged from original
   sym-arrow (layer-while-held arrow)
   g (tap-hold 150 150 g @sym-arrow)
-  h (tap-hold 150 150 h esc)
-  c_q (chord copypaste q)
-  c_w (chord copypaste w)
+
+  ;; Numpad layer toggle via 'b'
+  sym-numpad (layer-while-held numpad)
+  num-layer (tap-hold 150 150 b @sym-numpad)
+
+  ;; --- MASTER HOME ROW CHORD ALIASES ---
+  s (chord home-chords s-key)
+  d (chord home-chords d-key)
+  f (chord home-chords f-key)
+  j (chord home-chords j-key)
+  k (chord home-chords k-key)
+)
+
+;; --- THE MASTER CHORD ENGINE ---
+;; Coordinates Tab, Enter, and Escape cleanly with a comfortable 45ms window
+(defchords home-chords 45
+  (s-key) s
+  (d-key) d
+  (f-key) f
+  (j-key) j
+  (k-key) k
   
-  p_o (chord copypaste o)
-  p_p (chord copypaste p)
+  (d-key k-key) esc  ;; D + K = Escape
+  (f-key j-key) ret  ;; F + J = Enter
+  (s-key d-key) tab  ;; S + D = Tab
 )
 
-(defchords copypaste 50
-  (q      ) q 
-  (  w    ) w
-  ( q  w   ) C-c
-  (o      ) o 
-  (  p    ) p
-  ( o  p   ) C-v
-
-)
-
-(deflayer default
+(deflayer base 
   caps 
-  grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @c_q  @c_w  e    r    t    y    u    i    @p_o    @p_p    [    ]    \
-  @tab  @a   @s   @d   @f   @g     h    @j   @k   @l   @;   '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt           @spc            ralt rctl
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  @q   @w   @e   @r   t    y    @u   @i   @o   @p   [    ]    \
+  @tab a    @s   @d   @f   @g   h     @j   @k   l     ;    '    ret
+  lsft z    x    c    v    @num-layer   n    m    ,    .    /    rsft
+  lctl lmet lalt       spc           rmet ralt
 )
 
 (deflayer arrow
   caps 
-  grv  1 2  3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @c_q  @c_w  e    r    t    y    u    i    @p_o    @p_p    [    ]    \
-  @tab  @a   @s   @d   @f   g     ArrowLeft   ArrowUp   ArrowDown  ArrowRight  ;  '    ret
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    bspc i   o    p    [    ]    \
+  @tab a    s    d    f    g    ArrowLeft ArrowDown ArrowUp ArrowRight ;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt           @spc            ralt rctl
+  lctl lmet lalt            @spc            ralt rctl
 )
 
+;; Numpad layer — hold B to activate
+;; Right-hand keys become a numpad:
+;;   u i o  →  7 8 9
+;;   j k l  →  4 5 6
+;;   m , .  →  1 2 3
+;;   n      →  0
+;;   y      →  kp/  (divide)
+;;   p      →  kp*  (multiply)
+;;   ;      →  kp-  (minus)
+;;   '      →  kp+  (plus)
+;;   /      →  kp.  (decimal point)
+;;   ret    →  kprt (numpad Enter)
+(deflayer numpad
+  caps
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    kp/  kp7  kp8  kp9  kp*  [    ]    \
+  @tab a    s    d    f    g    h    kp4  kp5  kp6  kp-  kp+  kprt
+  lsft z    x    c    v    b    kp0  kp1  kp2  kp3  kp.  rsft
+  lctl lalt lmet           spc            rmet ralt
+)
