@@ -95,7 +95,7 @@ vim.g.have_nerd_font = true
 
 -- neovim-qt GUI font (requires a Nerd Font variant installed, e.g. "JetBrainsMono Nerd Font Mono")
 if vim.g.GuiLoaded or vim.fn.exists ':GuiFont' == 2 then
-  vim.cmd 'GuiFont! JetBrainsMono Nerd Font Mono:h16'
+  vim.cmd 'GuiFont! JetBrainsMono Nerd Font:h18'
 end
 
 -- [[ Setting options ]]
@@ -813,6 +813,7 @@ require('lazy').setup({
         opts = {},
       },
       'folke/lazydev.nvim',
+      'mikavilpas/blink-ripgrep.nvim',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -858,9 +859,23 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev', 'ripgrep' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          ripgrep = {
+            module = 'blink-ripgrep',
+            name = 'Ripgrep',
+            opts = {
+              prefix_min_len = 4, -- don't search on very short prefixes
+              backend = {
+                use = 'gitgrep-or-ripgrep',
+                ripgrep = {
+                  context_size = 2, -- less context per match = faster
+                  max_filesize = '200K', -- skip scanning large files
+                },
+              },
+            },
+          },
         },
       },
 
